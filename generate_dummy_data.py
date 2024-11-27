@@ -123,6 +123,27 @@ def generate_dummy_data(num_records=1000):
 
     print(f"{num_records} patient records, services, and bills generated successfully!")
 
+    # Step 10: Generate Expenses
+    expense_types = []
+    expense_type_names = ['Labour', 'Utilities', 'Equipment', 'Maintenance']
+    for expense_type_name in expense_type_names:
+        expense_type = ExpenseType(name=expense_type_name)
+        session.add(expense_type)
+        expense_types.append(expense_type)
+    session.commit()
+
+    for _ in range(100):  # Create 100 expenses
+        expense = Expense(
+            department=random.choice(departments),
+            type_id=random.choice(expense_types).id,
+            amount=random.uniform(500, 5000),  # Realistic expense amounts
+            date=fake.date_between(start_date='-1y', end_date='today')
+        )
+        session.add(expense)
+    session.commit()
+
+    print(f"{num_records} patient records, services, bills, and 100 expenses generated successfully!")
+
 # Run the function to generate the dummy data
 if __name__ == "__main__":
     generate_dummy_data(num_records=1000)

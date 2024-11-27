@@ -186,3 +186,4 @@ session.commit()
 bill_1 = Bill(patient=patient_1, service=service_1, scheme=scheme_1, amount=180, payment_type=payment_type_1, date=datetime.strptime('2024-11-25', '%Y-%m-%d').date())
 session.add(bill_1)
 session.commit()
+    
